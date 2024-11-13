@@ -1,0 +1,9 @@
+[package]
+name = "lrpt-k"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+noisy_float = "0.2.0"
+rand = "0.8.5"
+rand_distr = "0.4.3"
