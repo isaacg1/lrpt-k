@@ -16,7 +16,6 @@ fn sim(num_jobs: u64, num_servers: usize, load: f64, seed: u64) -> f64 {
     let mut num_completions = 0;
     let mut num_arrivals = 0;
     let mut total_work = 0.0;
-    let mut total_number = 0;
     let mut time = 0.0;
     let mut rng = StdRng::seed_from_u64(seed);
     let arrival_dist = Exp::new(load).unwrap();
@@ -72,7 +71,6 @@ fn sim(num_jobs: u64, num_servers: usize, load: f64, seed: u64) -> f64 {
         if was_arrival {
             let work: f64 = queue.iter().map(|job| job.rem_size).sum();
             total_work += work;
-            total_number += queue.len();
             let job = Job {
                 rem_size: size_dist.sample(&mut rng),
             };
@@ -81,7 +79,6 @@ fn sim(num_jobs: u64, num_servers: usize, load: f64, seed: u64) -> f64 {
             next_arrival_time = time + arrival_dist.sample(&mut rng);
         }
     }
-    println!("{}", total_number as f64 / num_arrivals as f64);
     total_work / num_arrivals as f64
 }
 
